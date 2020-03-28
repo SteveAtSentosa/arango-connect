@@ -1,0 +1,52 @@
+{
+  "name": "rytes",
+  "version": "0.0.1",
+  "description": "Flexible yet simple right management",
+  "note": "created based on https://itnext.io/step-by-step-building-and-publishing-an-npm-typescript-package-44fe7164964c",
+  "main": "lib/rytes.js",
+  "types": "lib/rytes.d.ts",
+  "keywords": [],
+  "files": [
+    "lib/**/*"
+  ],
+  "repository": "github.com/SteveAtSentosa/rytes",
+  "author": "Steven Saunders <steve.saunders@technicity.io>",
+  "license": "MIT",
+  "private": false,
+  "devDependencies": {
+    "@types/arangodb": "^3.5.5",
+    "@types/jest": "^25.1.4",
+    "@types/node": "^13.9.1",
+    "@types/ramda": "^0.26.43",
+    "jest": "^25.1.0",
+    "jest-chain": "^1.1.5",
+    "jest-extended": "^0.11.5",
+    "onchange": "^6.1.0",
+    "prettier": "^1.19.1",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^25.2.1",
+    "tslint": "^6.1.0",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "arangojs": "^6.13.0",
+    "json-stringify-safe": "^5.0.1",
+    "ramda": "^0.27.0",
+    "ramda-adjunct": "^2.25.0",
+    "ramda-lens-groups": "^1.2.3"
+  },
+  "scripts": {
+    "test": "yarn ln && jest --config jestconfig.json ./src/__tests__",
+    "watch:test": "onchange 'src/**/*.ts' -- yarn test",
+    "lint": "tslint -p tsconfig.json",
+    "ln:ferr": "rm -rf node_modules/ferr && ln -s  ../../ferr node_modules/ferr",
+    "ln:rlg": "rm -rf node_modules/ramda-lens-groups && ln -s  ../../ramda-lens-groups node_modules/ramda-lens-groups",
+    "ln": "yarn ln:ferr && yarn ln:rlg",
+    "clean": "rimraf ./lib",
+    "build": "yarn clean && yarn ln && tsc",
+    "prepare": "yarn build",
+    "prepublishOnly": "yarn test && yarn lint",
+    "preversion": "yarn lint"
+  }
+}
